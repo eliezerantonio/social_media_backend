@@ -1,3 +1,18 @@
-import { app } from "./app";
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import { router } from './routes'
 
-app.listen(3333);
+
+const server = express();
+
+server.use(express.json());
+server.use(cors())
+server.use(express.urlencoded({ extended: true }));
+server.use(morgan('dev'));
+
+server.use(router)
+
+
+export { server }
+

@@ -1,10 +1,11 @@
-import express from 'express';
-import { router } from './routes';
+import mongoose from 'mongoose'
+import { server } from "./server";
+import { APP_PORT, MONGO_ATLAS_URL } from './configs'
 
-const app=express();
+mongoose.connect(`${MONGO_ATLAS_URL}`)
+    .then(res => console.log('Database connected.'))
+    .catch(err => console.log(err));
 
-app.use(express.json());
-app.use(router)
 
+server.listen(APP_PORT , () => console.log(`Server is running on port ${APP_PORT}`))
 
-export { app }

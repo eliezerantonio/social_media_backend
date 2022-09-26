@@ -1,20 +1,36 @@
-import { Schema } from "mongoose";
-import { User } from "../../entities/User";
+
+import { IUser, IUserRequest, IUserUpdateRequest } from "../../dtos/User";
+import User from "../../entities/User";
 import { IUsersRepository } from "../IUsersRepository";
 
 export class MongooseUsersRepository implements IUsersRepository{
 
-    private users:User[] =[];
+  private repository = User;
 
-    async findByEmail(email: string): Promise<User> {
-       const user=this.users.find(user=>user.email==email);
+  async findByEmail(email: string): Promise<IUser>{
+      const userExists = await this.repository.findOne({ email });
+  
+      return userExists;
+  }
 
-       return user
-    }
+  async findById(id: string): Promise<IUser> {
+      const userExists = await this.repository.findById(id);
+      return userExists;
+  }
+      
+      
+  async save(user: IUserRequest): Promise<IUser> {
+      const newUser = await this.repository.create(user)
+      return newUser;
+  }
 
-   async save(user: User): Promise<void> {
+  async update(email: string, user: IUserUpdateRequest): Promise<IUser> {
+      const userUpdate = await this.repository.findOne({ email })
+      
+      userUpdate.name = user.name;
 
-     this.users.push(user);
-    }
+      const result = await userUpdate.save();
+      return result;
+  }
 
 }

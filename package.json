@@ -22,7 +22,7 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "start": "tsnd --transpile-only  --respawn --ignore-watch node_modules src/server.ts"
+    "start": "tsnd --transpile-only  --respawn --ignore-watch node_modules src/app.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
