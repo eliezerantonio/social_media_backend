@@ -7,5 +7,5 @@ mongoose.connect(`${MONGO_ATLAS_URL}`)
     .catch(err => console.log(err));
 
 
-server.listen(APP_PORT , () => console.log(`Server is running on port ${APP_PORT}`))
+server.listen(APP_PORT, () => console.log(`Server is running on port ${APP_PORT}`));
 
