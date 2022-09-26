@@ -1,23 +1,24 @@
-import{uuid}from "uuid";
+import { model, Schema } from "mongoose";
+import { IUser } from "../dtos/User";
 
-export class User{
+const UserSchema :Schema= new Schema({
 
-    public readonly id:string;
+    name: { 
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    }
+});
 
-    public name:string;
-    public email:string;
-    public password:string;
-
-    constructor(props:Omit<User,  'id'>,id?:string){
-
-        Object.assign(this,props);
-
-        if(!id){
-            this.id=uuid();
-        }
-
-   }
-
-
-
-}
+export default model<IUser>('User', UserSchema);
