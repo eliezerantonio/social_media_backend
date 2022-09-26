@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../IUsersRepository";
 
-export class PostgresUsersRepository implements IUsersRepository{
+export class MongooseUsersRepository implements IUsersRepository{
 
     private users:User[] =[];
 
