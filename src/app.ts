@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 import { server } from "./server";
+import dotenv from 'dotenv';
+
 import { APP_PORT, MONGO_ATLAS_URL } from './configs'
 
 mongoose.connect(`${MONGO_ATLAS_URL}`)
