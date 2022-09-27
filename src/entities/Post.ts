@@ -1,10 +1,11 @@
 import { Schema, model } from "mongoose";
+import { PostDocument } from "../dtos/Post";
 
 
-const PostSchema = new Schema ({
+const PostSchema = new Schema<PostDocument> ({
+    
     files: {
         type: Array,
-        trim: true,
     },
     
     description: {
@@ -20,7 +21,7 @@ const PostSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-    created_at: {
+    createdAt: {
         type: Date,
         default: Date.now()
     }
