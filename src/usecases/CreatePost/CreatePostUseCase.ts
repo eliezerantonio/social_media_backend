@@ -1,7 +1,7 @@
 import { IPostsRepository } from "../../repositories/IPostRepository";
 import { ICreatePostDTO } from "./ICreatePostDTO";
 
-export class CreateuserUseCase{
+export class CreatePostUseCase{
 
     constructor(private postsRepository:IPostsRepository){}
 
