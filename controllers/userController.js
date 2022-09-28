@@ -16,7 +16,7 @@ exports.createUser = async (req, res) => {
   }
   //extrair email e password
 
-  const { username, password, email, name,phone } = req.body;
+  const {  password, email, name,phone } = req.body;
 
   try {
     //verificar se o email ja existe antes se cadastrar
@@ -31,7 +31,7 @@ exports.createUser = async (req, res) => {
     //hashear  a senha
 
     const user = new User({
-      username, email, password, name,phone
+       email, password, name,phone
     });
 
     const salt = await bcryptjs.genSalt(10);
@@ -95,7 +95,7 @@ exports.updateUser = async (req, res) => {
       
     }
     const newPost = {
-      name, username, phone, pic
+      name, phone, pic
     }
     const user = await User.findOneAndUpdate(
       { _id: id },

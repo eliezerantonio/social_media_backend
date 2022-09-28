@@ -25,12 +25,23 @@ exports.createPost = async (req, res, next) => {
     
     //* create Post *//
     const post = new Post(req.body);
+    console.log(post);
     post.creator = id;    
+    let pics = [];
+   
+    // if (req.files) {
+    
+    //   for (var i = 0; i < req.files.length; i++) {
+    //     pics.push(req.protocol +"://" +req.headers.host +"/uploads/" + req.files[i].filename
+    //     );
+    //     post.pics = pics;
+    //   }
+    // }
     post.save();
 
   
     
-    res.json({ post });
+    res.json( post );
   } catch (error) {
     res.status(500).send("Error: "+error);
   }
@@ -204,76 +215,12 @@ exports.deletePost = async (req, res) => {
     
     await Post.findOneAndRemove({ _id: id });
     
-    const userExists = await User.findById(userId);
-
-    if (!userExists) {
-      return res.status(404).json({ message: "User doesn't exists" });
-    }
-    userExists.posts -= 1;
-
-    await User.findOneAndUpdate(
-      { _id: userId },
-      { $set: userExists },
-      { new: true }
-    );
+  
     res.json({ message: "Post deleted with successful" });
 
   } catch (error) {
     res.status(500).send("Error: "+ error);
   }
+
 };
 
-
-//* POST - Add an Image  *//
-exports.createPostImages = async (req, res, next) => {
-  
-  try {
-
-    if (req.files) {
-      let path = "";
-      const { postId } = req.body;
-      const { photo }   = req.files;
-
-
-      const postExists = await Post.findById(postId);
-      if (!postExists) {
-        return res.status(404).json({ message: "Post doesn't exists" });
-      }
-
-      await cloudinary.uploader.upload(photo.tempFilePath, (err, result) => {
-        if (err) {
-          return res.status(404).json({ message: "Error uploading: "+err });
-        }
-        path += result.url;
-      });
-
-      const postImage = new PostImage({ postId, path });
-
-      postImage.save();
-      
-      res.json(postImage);
-    }
-
-  } catch (error) {
-    res.status(500).send("Error: "+error);
-  }
-};
-
-//* GET -  GET ALL Images on post *//
-exports.findAllImagesPost = async (req, res, next) => {
-  try {
-    const { postId } = req.params;
-
-    const postExists = await Post.findById(postId);
-    if (!postExists) {
-      return res.status(404).json({ message: "Post doesn't exists" });
-    }
-    
-    const images = await PostImage.find({ postId: postId });
-
-    res.json({ images });
-
-  } catch (error) {
-    res.status(500).send("Error: " + error);
-  }
-};

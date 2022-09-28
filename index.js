@@ -1,7 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const fileupload = require('express-fileupload');
-
+var path = require('path');
 //criando servidor
 const app = express();
 
@@ -12,9 +12,11 @@ connectDB();
 app.use(fileupload({
   useTempFiles: true
 }));
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
+
 app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 
 

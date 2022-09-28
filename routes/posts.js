@@ -14,7 +14,5 @@ router.patch("/like/:id", auth, postController.likePost);
 router.patch("/unlike/:id", auth, postController.unlikePost);
 router.delete("/:id", auth, postController.deletePost);
 
-router.post("/images", auth, postController.createPostImages);
-router.get("/images/:postId", auth, postController.findAllImagesPost);
 
 module.exports = router;

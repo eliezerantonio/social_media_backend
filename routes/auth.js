@@ -9,7 +9,7 @@ const authController = require("../controllers/authController");
 router.post(
   "/",
   [
-    check("username", "Infome um username valido").isLength({
+    check("email", "Infome um username valido").isLength({
       min: 1,
     }),
     check("password", "Preencha o campo").isLength({

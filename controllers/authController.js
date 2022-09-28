@@ -12,12 +12,12 @@ exports.authUser = async (req, res, next) => {
 
   //extraur email e senha
 
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     //revisar se e um usuari o registrado
 
-    let user = await User.findOne({ username });
+    let user = await User.findOne({ email });
 
     if (!user) {
       return res.status(400).json({ msg: "Usuario nao existe" });
@@ -42,7 +42,7 @@ exports.authUser = async (req, res, next) => {
       (error, token) => {
         if (error) throw error;
 
-        //retirn token caso der sucesso al
+        //return token caso der sucesso al
         res.json({ token: token, user: userSaved });
       }
     );

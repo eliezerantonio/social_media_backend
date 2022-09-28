@@ -12,9 +12,8 @@ exports.createComment = async (req, res) => {
     //criar comentario
     const comment = new Comment(req.body);
     comment.userId = req.user.id;
-    comment.username = req.user.name;
-    comment.pic = req.user.pic;
-
+   
+   
     comment.save();
 
     res.json(comment);
