@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 const { check } = require("express-validator");
 //criar usuarios
 
-router.post("/",[
+router.post("/signup",[
     check("name", "Nome e obrigatorio").not().isEmpty(),
     check("email", "Infome email valido").isEmail(),
     check("password", "Senha deve ser no minimo de 6 caracteres").isLength({

@@ -43,7 +43,7 @@ exports.authUser = async (req, res, next) => {
         if (error) throw error;
 
         //return token caso der sucesso al
-        res.json({ token: token, user: userSaved });
+        res.json({ token: token, });
       }
     );
   } catch (error) {

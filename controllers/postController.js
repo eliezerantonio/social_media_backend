@@ -57,7 +57,7 @@ exports.findAllPosts = async (req, res) => {
       "length": posts.length, 
       "posts": posts
     } 
-    res.json(result);
+    res.json(posts);
 
   } catch (error) {
     res.status(500).send("Error: " + error);
