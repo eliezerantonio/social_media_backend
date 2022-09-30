@@ -1,6 +1,5 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
-const PostImage = require("../models/PostImage");
 
 const { cloudinary } = require('../providers/CloudinaryService');
 
@@ -52,11 +51,10 @@ exports.createPost = async (req, res, next) => {
 exports.findAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
-
-    const result = {
-      "length": posts.length, 
-      "posts": posts
-    } 
+   let id= posts[0].creator.toString()
+    
+    const user = await User.findById(id);
+    console.log(posts)
     res.json(posts);
 
   } catch (error) {

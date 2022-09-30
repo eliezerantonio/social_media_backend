@@ -24,10 +24,11 @@ exports.createComment = async (req, res) => {
 };
 
 exports.findAllByPostComments = async (req, res) => {
-  const { post } = req.body;
+  const  post  = req.params.postId;
+  
   try {
-    const comments = await Comment.find({ post });
-    res.json({ comments });
+    const comments = await Comment.where({ postId: post });
+    res.json( comments );
   } catch (error) {
     console.log(error);
     res.status(500).send("Ocorreu um erro");

@@ -12,6 +12,10 @@ const PostSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  comments: {
+    type: Number,
+    default: 0,
+  },
 
   creator: {
     type: mongoose.Schema.Types.ObjectId,
@@ -21,5 +25,11 @@ const PostSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+});
+
+PostSchema.method("toJSON", function () {
+  const { __v, _id, ...object } = this.toObject();
+  object.id = _id;
+  return object;
 });
 module.exports = mongoose.model("Post", PostSchema);

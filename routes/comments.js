@@ -8,7 +8,7 @@ const { check } = require("express-validator");
 
 
 // router.get("/:id", auth, commentController.findById);
-router.get("/", auth, commentController.findAllByPostComments);
+router.get("/:postId", auth, commentController.findAllByPostComments);
 
 router.post("/",auth,[check("description", "Descricao deve ser no minimo de 1 caracter").isLength({min: 1,}),],commentController.createComment);
 
