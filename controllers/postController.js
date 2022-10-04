@@ -51,8 +51,8 @@ exports.createPost = async (req, res, next) => {
 exports.findAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
-   let id= posts[0].creator.toString()
-    
+    let id = posts[0].creator.toString()
+
     const user = await User.findById(id);
     console.log(posts)
     res.json(posts);
@@ -124,12 +124,7 @@ exports.likePost = async (req, res) => {
     if (postExists.likers.includes(likers)) {
       return res.status(401).json({ message: "Like already exists!" });
     }
-    
-    const data = await Post.findOneAndUpdate(
-      { _id: id },
-      { $push: {likers} },
-      { new: true }
-    );
+   
 
     const post = await Post.findOneAndUpdate(
       { _id: id },

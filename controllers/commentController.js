@@ -1,4 +1,5 @@
 const Comment = require("../models/Comment");
+const Post = require("../models/Post");
 
 const { validationResult } = require("express-validator");
 
@@ -12,6 +13,13 @@ exports.createComment = async (req, res) => {
     //criar comentario
     const comment = new Comment(req.body);
     comment.userId = req.user.id;
+
+    // UPDATE COMMENTS
+    await Post.findOneAndUpdate(
+      { _id: id },
+      { $set: { comments: (data.comments += 1) } },
+      { new: true }
+    );
    
    
     comment.save();
