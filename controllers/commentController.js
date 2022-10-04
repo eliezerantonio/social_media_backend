@@ -12,11 +12,16 @@ exports.createComment = async (req, res) => {
   try {
     //criar comentario
     const comment = new Comment(req.body);
+    comment.postId=req.params.postId;
     comment.userId = req.user.id;
 
+    const data = await Post.findById(
+       req.params.postId 
+     
+    );
     // UPDATE COMMENTS
-    await Post.findOneAndUpdate(
-      { _id: id },
+      await Post.findOneAndUpdate(
+      { _id: req.params.postId },
       { $set: { comments: (data.comments += 1) } },
       { new: true }
     );

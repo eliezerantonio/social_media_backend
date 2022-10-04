@@ -24,7 +24,6 @@ exports.createPost = async (req, res, next) => {
     
     //* create Post *//
     const post = new Post(req.body);
-    console.log(post);
     post.creator = id;    
     let pics = [];
    
@@ -54,7 +53,6 @@ exports.findAllPosts = async (req, res) => {
     let id = posts[0].creator.toString()
 
     const user = await User.findById(id);
-    console.log(posts)
     res.json(posts);
 
   } catch (error) {
